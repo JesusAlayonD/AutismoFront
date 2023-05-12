@@ -3,20 +3,24 @@
 
     let name
     let lastName
+    let patientName
     let email
     let password
     let sex
+    let age
 
     const register = () => {
         const data = {
             name: name,
             last_name: lastName,
+            patientName: patientName,
             email: email,
             password: password,
             sex: sex,
+            patientAge: age
         }
 
-        axios.post('http://localhost:5001/api/v1/doctor/', data)
+        axios.post('http://localhost:5001/api/v1/patient/', data)
         .then((response) => {
         console.log(response.data)
       })
@@ -29,14 +33,29 @@
                 <div id="fullName" class="flex flex-row">
                     <!-- first name -->
                     <div id="firstName" class="w-1/2 mr-1">
-                        <label for="fname" class="text-sm">Nombre</label><br>
+                        <label for="fname" class="text-sm">Nombre del Tutor</label><br>
                         <input type="text" name="" id="fname" v-model="name"
                             class="h-8 w-full rounded-md border border-slate-300 text-sm pl-2 bg-transparent outline-blue-600 shadow-sm">
                     </div>
                     <!-- last name -->
                     <div id="lastName" class="w-1/2 mr-1">
-                        <label for="lname" class="text-sm">Apellidos</label><br>
+                        <label for="lname" class="text-sm">Apellidos del Tutor</label><br>
                         <input type="text" name="" id="lname" v-model="lastName"
+                            class="h-8 w-full rounded-md border border-slate-300 text-sm pl-2 bg-transparent outline-blue-600 shadow-sm">
+                    </div>
+                </div>
+                <!-- Datos del paciente -->
+                <div id="fullName" class="flex flex-row">
+                    <!-- first name -->
+                    <div id="firstName" class="w-1/2 mr-1">
+                        <label for="fname" class="text-sm">Nombre del Paciente</label><br>
+                        <input type="text" name="" id="nameP" v-model="patientName"
+                            class="h-8 w-full rounded-md border border-slate-300 text-sm pl-2 bg-transparent outline-blue-600 shadow-sm">
+                    </div>
+                    <!-- last name -->
+                    <div id="lastName" class="w-1/2 mr-1">
+                        <label for="lname" class="text-sm">Edad del Paciente</label><br>
+                        <input type="number" name="" id="ageP" v-model="age"
                             class="h-8 w-full rounded-md border border-slate-300 text-sm pl-2 bg-transparent outline-blue-600 shadow-sm">
                     </div>
                 </div>
