@@ -15,9 +15,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="flex md:inline-flex p-4 items-center hover:bg-gray-50">
-                        <span>Iniciar Sesión</span>
-                    </a>
+                    <RouterLink to="/login" class="flex md:inline-flex p-4 items-center hover:bg-gray-50">Iniciar Sesión</RouterLink>
                 </li>
                 <li>
                     <RouterLink to="/register" class="flex md:inline-flex p-4 items-center hover:bg-gray-50">Registrarse</RouterLink>
