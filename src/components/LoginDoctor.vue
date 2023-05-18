@@ -22,7 +22,7 @@
 
                 <!-- email -->
                 <label for="email" class="text-sm">Email</label><br>
-                <input type="emial" name="" id="email" v-model="email"
+                <input type="email" name="" id="email" v-model="email"
                     class="h-8 w-full rounded-md border border-slate-300 text-sm pl-2 bg-transparent outline-blue-600 shadow-sm">
                 <!-- password -->
                 <label for="password" class="text-sm">Contraseña</label><br>
