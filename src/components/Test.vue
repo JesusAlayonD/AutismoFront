@@ -7,8 +7,37 @@
     import MinorLevel from "./LowLevel.vue";
     import MediumLevel from "./MediumLevel.vue";
     import HighLevel from "./HighLevel.vue";
+    import axios from "axios";
+    import { onMounted } from 'vue'
+
+    onMounted(async() => {
+        const user = patientStore().data
+        if(user.test){
+                let data = await axios.get(`http://localhost:5001/api/v1/test/?_id=${user.test}`)
+                let testData = data.data[0]
+                continueS.value = true
+                if(testData.finished){
+                    continueR.value = true
+                } else {
+                    continueR.value = false
+                }
+                numberQuestion.value = testData.answers.length
+                question.value = questions[testData.answers.length].question
+                statusY.value = testData.pointsY
+                statusN.value = testData.pointsN
+                test = user.test
+                
+            } 
+        }
+        
+
+    )
     
-    //console.log(patientStore().id)
+    const user = patientStore().data
+    let test
+
+    // Check Test
+   
     
 
     const route = useRoute()
@@ -24,7 +53,14 @@
         }
     })
 
-    const handleContinue = () => {
+    const handleContinue = async () => {
+        await axios.post("http://localhost:5001/api/v1/test/", { 
+                name: user.patientName,
+                patient: user._id
+            }).then((response) => {
+                test = response.data._id;
+                axios.put(`http://localhost:5001/api/v1/patient/${user._id}`, { test: test })
+            });
         continueS.value = true
         continueR.value = false
     }
@@ -36,6 +72,8 @@
     const answer = ref(3)
     const statusY = ref(0)
     const statusN = ref(0)
+    const finished = ref(false)
+    const result = ref('')
 
     const blockButtonY = computed(() => {
         if(answer.value === 1){
@@ -69,9 +107,11 @@
 
     const NoLevelR = computed(() => {
         if(numberQuestion.value === 8){
-            console.log('NoNo')
             if(statusY.value < statusN.value){
+                result.value = 'No detectado'
+                finished.value = true
                 continueR.value = true
+                finishedPush()
                 return "visible"
             } else {
                 return "hidden"
@@ -83,9 +123,11 @@
 
     const LowLevelR = computed(() => {
         if(numberQuestion.value === 13){
-            console.log('NoLow')
             if(statusY.value < statusN.value){
+                result.value = 'Leve'
+                finished.value = true
                 continueR.value = true
+                finishedPush()
                 return "visible"
             } else {
                 return "hidden"
@@ -97,9 +139,11 @@
 
     const MediumLevelR = computed(() => {
         if(numberQuestion.value === 23){
-            console.log('NoM')
             if(statusY.value < statusN.value){
+                result.value = 'Moderado'
+                finished.value = true
                 continueR.value = true
+                finishedPush()
                 return "visible"
             } else {
                 return "hidden"
@@ -111,9 +155,11 @@
 
     const HighLevelR = computed(() => {
         if(numberQuestion.value === 23){
-            console.log('High')
             if(statusY.value > statusN.value){
+                result.value = 'Alto'
+                finished.value = true
                 continueR.value = true
+                finishedPush()
                 return "visible"
             } else {
                 return "hidden"
@@ -122,6 +168,20 @@
                 return "hidden"
             }
     })
+
+    const finishedPush = async () => {
+        if(finished.value) {
+        await axios.put(`http://localhost:5001/api/v1/test/${test}`, { 
+            result: result.value,
+            pointsY: statusY.value,
+            pointsN: statusN.value,
+            finished: true
+        }).then((response) => {
+            axios.put(`http://localhost:5001/api/v1/patient/${user._id}`, { result: result.value, finished: true })
+          });
+    }
+    }
+    
 
     const yes = () => {
         answer.value = 1
@@ -132,17 +192,27 @@
     }
 
 
-    const handleContinueQuiz = () => {
-        
+    const handleContinueQuiz = async () => {
         if (answer.value === 1) {
             statusY.value += questions[numberQuestion.value].value
+            await axios.put(`http://localhost:5001/api/v1/test/${test}/answers`, { answer: 'si' }).then((response) => {
+            axios.put(`http://localhost:5001/api/v1/test/${test}`, 
+            { pointsY: statusY.value,
+            pointsN: statusN.value, })
+          });
         } else {
             statusN.value += questions[numberQuestion.value].value
+            await axios.put(`http://localhost:5001/api/v1/test/${test}/answers`, { answer: 'no' }).then((response) => {
+            axios.put(`http://localhost:5001/api/v1/test/${test}`, 
+            { pointsY: statusY.value,
+            pointsN: statusN.value, })
+            
+          });
         }
         numberQuestion.value ++
-        question.value = questions[numberQuestion.value].question
-        console.log(statusY.value)
-        console.log(statusN.value)
+        if(numberQuestion.value < 23){
+            question.value = questions[numberQuestion.value].question
+        }
         answer.value = 3
         
     }

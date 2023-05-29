@@ -13,8 +13,11 @@
             </div>
         </div>
         <div class="flex gap-3 pt-2 mt-4 justify-center">
-            <RouterLink to="/">
-                <button type="button" class="shadow-md p-3 rounded-md transition duration-300 bg-white text-blue-700 hover:bg-blue-700 hover:text-white">Salir</button>
+            <RouterLink to="/choosedoctor">
+                <button type="button" class="shadow-md p-3 rounded-md transition duration-300 bg-white text-blue-700 hover:bg-blue-700 hover:text-white">Continuar</button>
+            </RouterLink>
+            <RouterLink to="/test">
+                <button type="button" class="shadow-md p-3 rounded-md transition duration-300 bg-white text-blue-700 hover:bg-blue-700 hover:text-white">Realizar test de nuevo</button>
             </RouterLink>
         </div>
         
