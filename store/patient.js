@@ -17,5 +17,16 @@ export const patientStore = defineStore("patient", {
         console.log(err);
       }
     },
+    async register(data) {
+      try {
+        await axios
+          .post("http://localhost:5001/api/v1/patient/", data)
+          .then((response) => {
+            this.data = response.data;
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
 });

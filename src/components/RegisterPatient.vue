@@ -1,5 +1,9 @@
 <script setup>
     import axios from 'axios';
+    import { patientStore } from '../../store/patient.js'
+    import { useRoute, useRouter } from "vue-router";
+
+    const router = useRouter();
 
     let name
     let lastName
@@ -9,7 +13,7 @@
     let sex
     let age
 
-    const register = () => {
+    const register = async() => {
         const data = {
             name: name,
             last_name: lastName,
@@ -20,11 +24,11 @@
             patientAge: age
         }
 
-        axios.post('http://localhost:5001/api/v1/patient/', data)
-        .then((response) => {
-        console.log(response.data)
-      })
-    }
+        await patientStore().register(data)
+
+        router.push({ name: "test"})
+      }
+    
 </script>
 
 <template>

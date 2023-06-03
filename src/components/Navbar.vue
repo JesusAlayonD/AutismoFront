@@ -10,7 +10,7 @@
             </div>
             <ul class="md:px-2 ml-auto md:flex md:space-x-2 absolute md:relative top-full left-0 right-0">
                 <li>
-                    <RouterLink to="/register" class="flex md:inline-flex p-4 items-center hover:bg-gray-50">Cerrar Sesión</RouterLink>
+                    <RouterLink to="/" class="flex md:inline-flex p-4 items-center hover:bg-gray-50">Cerrar Sesión</RouterLink>
                 </li>
             </ul>
             <div class="ml-auto md:hidden text-gray-500 cursor-pointer">
