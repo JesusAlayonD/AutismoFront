@@ -51,7 +51,7 @@
 <template>
     
 
-    <div :class="showChoose" class="container px-4 flex-grow w-full py-4 sm:py-16 mx-auto px-0 m-36">
+    <div :class="showChoose" class="container px-4 flex-grow w-full py-4 sm:py-16 mx-auto m-36">
       <div class="mx-auto w-full md:w-4/5 px-4">
         <div class="container my-8">
           <div class="flex justify-between items-center mb-10">
@@ -106,7 +106,7 @@
       </div>
     </div>
 
-    <div :class="showText" class="container px-4 flex-grow w-full py-4 sm:py-16 mx-auto px-0 m-36">
+    <div :class="showText" class="container px-4 flex-grow w-full py-4 sm:py-16 mx-auto m-36">
       <div class=" flex-column mx-auto text-center w-full md:w-4/5 px-4">
         <h1 class="text-6xl pb-12">Se ha registrado con el médico, este se pondrá en contacto con usted por medio de correo electrónico.</h1>
         <h1 class="text-6xl">Agradecemos su participación y esperamos grandes resultados para su tratamiento.</h1>
