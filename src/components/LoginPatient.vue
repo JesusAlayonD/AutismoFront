@@ -1,12 +1,15 @@
 <script setup>
     import axios from 'axios';
+    import { ref, computed } from "vue";
     import { patientStore } from '../../store/patient.js'
     import { useRoute, useRouter } from "vue-router";
+    
     
 
     const router = useRouter();
     let email
     let password
+    const error = ref(false)
     
     const login = async() => {
         const data = {
@@ -16,9 +19,22 @@
 
         await patientStore().login(data)
 
-        router.push({ name: "test"})
+        if (patientStore().data.name) {
+            router.push({ name: "test"})
+        } else {
+            error.value = true
+        }
+        
       }
     
+      const errorHandle = computed(() => {
+        if(error.value){
+            return "visible"
+        }else{
+            return "hidden"
+        }
+    })
+
 </script>
 
 <template>
@@ -31,7 +47,10 @@
                 <!-- password -->
                 <label for="password" class="text-sm">Contraseña</label><br>
                 <input type="password" name="" id="password" v-model="password"
-                    class="h-8 w-full rounded-md border border-slate-300 text-sm pl-2 bg-transparent outline-blue-600 shadow-sm">
+                    class="mb-4 h-8 w-full rounded-md border border-slate-300 text-sm pl-2 bg-transparent outline-blue-600 shadow-sm">
+                    <div :class="errorHandle" class="text-sm bg-red-100 border border-red-500 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <span class="block sm:inline">El correo o la contraseña son incorrectos.</span>
+                    </div>
                 <!-- Sign up / submit button -->
 
                 <input type="submit" name="" id="signUp" value="Login"
