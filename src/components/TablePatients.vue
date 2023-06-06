@@ -9,14 +9,7 @@
             console.log(doctor.value._id)
 
             patients.value = await axios.get(`http://localhost:5001/api/v1/patient/?doctor=${doctor.value._id}`)
-            patients.value = patients.value.data
-            /* if(user.value.doctor){
-                choosed.value = true
-            } else {
-                doctors.value = await axios.get(`http://localhost:5001/api/v1/doctor/`)
-                data.value = doctors.value.data
-            } */
-            
+            patients.value = patients.value.data           
         })
 
         const doctor = ref({});
@@ -77,7 +70,7 @@
 </script>
 
 <template>
-    <section class="py-1 bg-blueGray-50 pb-20">
+    <section class="py-1 bg-blueGray-50 min-h-screen">
 <div class="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-24">
   <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
     <div class="rounded-t mb-0 px-4 py-3 border-0">
