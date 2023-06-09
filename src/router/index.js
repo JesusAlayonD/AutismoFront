@@ -5,6 +5,7 @@ import LoginView from "../views/LoginView.vue";
 import TestView from "../views/TestView.vue";
 import ChooseDoctorView from "../views/ChooseDoctorView.vue";
 import PatientsInfoView from "../views/PatientsInfo.vue";
+import AdminView from "../views/Admin.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,6 +41,12 @@ const router = createRouter({
       path: "/patientsinfo",
       name: "patientsInfo",
       component: PatientsInfoView,
+      props: true,
+    },
+    {
+      path: "/admin",
+      name: "admin",
+      component: AdminView,
       props: true,
     },
   ],

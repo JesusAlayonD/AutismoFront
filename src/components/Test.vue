@@ -22,7 +22,11 @@
                     continueR.value = false
                 }
                 numberQuestion.value = testData.answers.length
-                question.value = questions[testData.answers.length].question
+                if(testData.answers.length == 23){
+                    question.value = questions[22].question
+                } else {
+                    question.value = questions[testData.answers.length].question
+                }
                 statusY.value = testData.pointsY
                 statusN.value = testData.pointsN
                 test = user.test
