@@ -6,7 +6,6 @@
 
     onMounted(async() => {
             user.value = await patientStore().data
-            console.log(user.value)
             if(user.value.doctor){
                 choosed.value = true
             } else {

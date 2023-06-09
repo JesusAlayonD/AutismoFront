@@ -10,19 +10,24 @@
 
     onMounted(async() => {
             user.value = await patientStore().data
-            test.value = await axios.get(`http://localhost:5001/api/v1/test/?_id=${user.value.test}`)
+            user.value = await axios.get(`http://localhost:5001/api/v1/patient/?_id=${user.value._id}`)
+            console.log(user.value.data[0].test)
+            test.value = await axios.get(`http://localhost:5001/api/v1/test/?_id=${user.value.data[0].test}`)
             answers.value = test.value.data[0].answers
+            result.value = test.value.data[0].result
             
         })
     const user = ref({});
     const test = ref({});
     const answers = ref([]);
+    const result = ref("")
 
     const animals = [
         ['Pregunta', 'Respuesta']
       ]
     const exportPdf = () => {
         let data = [
+        ['Resultado', result.value],
         [ 'Pregunta', 'Respuesta']
         ]
         answers.value.map((row, index) => {
@@ -60,6 +65,7 @@
                 <button @click="exportPdf()" type="button" class="shadow-md p-3 rounded-md transition duration-300 bg-blue-700 text-white hover:bg-white hover:text-blue-700">Descargar Preguntas</button>
             </div>
         </div>
+        <h1 class="text-2xl mb-4">Resultado - {{ result }} </h1>
         <div class="border rounded-lg item-center w-2/3">
             <table class="">
                 <thead>

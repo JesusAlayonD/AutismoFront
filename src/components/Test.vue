@@ -22,7 +22,7 @@
                     continueR.value = false
                 }
                 numberQuestion.value = testData.answers.length
-                if(testData.answers.length == 23){
+                if(testData.answers.length === 23){
                     question.value = questions[22].question
                 } else {
                     question.value = questions[testData.answers.length].question
@@ -126,7 +126,7 @@
     })
 
     const LowLevelR = computed(() => {
-        if(numberQuestion.value === 13){
+        if(numberQuestion.value === 14){
             if(statusY.value < statusN.value){
                 result.value = 'Leve'
                 finished.value = true
