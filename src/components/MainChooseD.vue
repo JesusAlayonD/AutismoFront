@@ -51,7 +51,7 @@
 <template>
     
 
-    <div :class="showChoose" class="container px-4 flex-grow w-full py-4 sm:py-16 mx-auto m-36">
+    <div :class="showChoose" class="container px-4 flex-grow w-full py-4 sm:py-16 mx-auto mt-10">
       <div class="mx-auto w-full md:w-4/5 px-4">
         <div class="container my-8">
           <div class="flex justify-between items-center mb-10">
