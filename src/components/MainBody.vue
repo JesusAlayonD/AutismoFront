@@ -1,7 +1,7 @@
 <template>
     
 
-    <section class="relative pt-28 min-h-screen">
+    <section class="relative pt-6 min-h-screen">
         <div class="container mx-auto flex flex-col-reverse lg:flex-row items-center mt-14 lg:mt-28">
             <!-- Content -->
             <div class="flex pr-28 flex-col items-center lg:items-start">

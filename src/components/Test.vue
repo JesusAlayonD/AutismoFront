@@ -110,7 +110,7 @@
     })
 
     const NoLevelR = computed(() => {
-        if(numberQuestion.value === 8){
+        if(numberQuestion.value === 8 || numberQuestion.value === 9) {
             if(statusY.value < statusN.value){
                 result.value = 'No detectado'
                 finished.value = true
@@ -126,7 +126,7 @@
     })
 
     const LowLevelR = computed(() => {
-        if(numberQuestion.value === 14){
+        if(numberQuestion.value === 13  || numberQuestion.value === 14){
             if(statusY.value < statusN.value){
                 result.value = 'Leve'
                 finished.value = true
@@ -142,7 +142,7 @@
     })
 
     const MediumLevelR = computed(() => {
-        if(numberQuestion.value === 23){
+        if(numberQuestion.value === 23  || numberQuestion.value === 24){
             if(statusY.value < statusN.value){
                 result.value = 'Moderado'
                 finished.value = true
